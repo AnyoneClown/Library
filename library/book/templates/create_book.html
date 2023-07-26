@@ -1,0 +1,49 @@
+{% extends 'base.html' %}
+{% block title %}Create book{% endblock %}
+
+{% block content %}
+<style>
+    form {
+        margin-bottom: 20px;
+    }
+
+    h3 {
+        margin-bottom: 10px;
+    }
+
+    input, textarea, select {
+        margin-bottom: 10px;
+        padding: 5px;
+    }
+
+    button {
+        padding: 8px 12px;
+        background-color: #007bff;
+        border: none;
+        color: #fff;
+        cursor: pointer;
+    }
+
+    button:hover {
+        background-color: #0056b3;
+    }
+</style>
+
+<button onclick="window.location.href='{% url 'index_books' %}'">View all books</button>
+<form action="{% url 'create_book_in_db' %}" method="post">
+    {% csrf_token %}
+    <h3>Enter book name:</h3>
+    <input type="text" name="book_name"><br>
+    <h3>Enter book description:</h3>
+    <textarea type="text" name="book_description"></textarea><br>
+    <h3>Enter book count:</h3>
+    <input type="number" name="book_count"><br><br>
+    <h3>Choose author:</h3>
+    <select name="author">
+        {% for author in authors %}
+        <option value="{{ author.id }}">{{ author.name }}</option>
+        {% endfor %}
+    </select>
+    <button type="submit">Create new book</button>
+</form>
+{% endblock %}

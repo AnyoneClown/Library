@@ -1,0 +1,72 @@
+{% extends 'base.html' %}
+{% block title %}Books{%endblock%}
+
+{% block content %}
+<style>
+    .container {
+        margin-top: 50px;
+    }
+
+    h1 {
+        margin-bottom: 20px;
+    }
+
+    table {
+        width: 100%;
+        border-collapse: collapse;
+        margin-bottom: 20px;
+    }
+
+    th,
+    td {
+        padding: 8px;
+        text-align: left;
+        border-bottom: 1px solid #ddd;
+    }
+
+    .btn {
+        padding: 8px 12px;
+        background-color: #007bff;
+        color: #fff;
+        border: none;
+        cursor: pointer;
+    }
+
+    .btn:hover {
+        background-color: #0056b3;
+    }
+</style>
+<div class="container">
+    <h1>Info about book</h1>
+
+    <table>
+        <tr>
+            <th>Book id:</th>
+            <td>{{ book.id }}</td>
+        </tr>
+        <tr>
+            <th>Book name:</th>
+            <td>{{ book.name }}</td>
+        </tr>
+        <tr>
+            <th>Book description:</th>
+            <td>{{ book.description }}</td>
+        </tr>
+        <tr>
+            <th>Book count:</th>
+            <td>{{ book.count }}</td>
+        </tr>
+        <tr>
+            <th>Book authors:</th>
+            <td>{{ author }}</td>
+        </tr>
+    </table>
+
+    {% if role == 1 %}
+    <form action="{% url 'delete_book' book.id %}" method="post">
+        {% csrf_token %}
+        <button type="submit" class="btn">Delete book</button>
+    </form>
+    {% endif %}
+</div>
+{% endblock %}

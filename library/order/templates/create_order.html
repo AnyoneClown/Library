@@ -1,0 +1,45 @@
+{% extends 'base.html' %}
+
+{% block title %}Place order{% endblock %}
+
+{% block content %}
+<style>
+    form {
+        margin-bottom: 20px;
+    }
+
+    h2 {
+        margin-bottom: 10px;
+    }
+
+    select, input {
+        margin-bottom: 10px;
+        padding: 5px;
+    }
+
+    button {
+        padding: 8px 12px;
+        background-color: #007bff;
+        border: none;
+        color: #fff;
+        cursor: pointer;
+    }
+
+    button:hover {
+        background-color: #0056b3;
+    }
+</style>
+
+<form action="{% url 'place_order' %}" method="post">
+    {% csrf_token %}
+    <h2>Choose book you want to order:</h2>
+    <select name="book_id">
+        {% for book in books %}
+        <option value="{{ book.id }}">{{ book.name }}</option>
+        {% endfor %}
+    </select><br>
+    <h2>In how many days book will be returned:</h2>
+    <input type="number" name="return_date">
+    <button type="submit">Place order</button>
+</form>
+{% endblock %}

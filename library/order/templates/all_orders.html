@@ -1,0 +1,49 @@
+{% extends 'base.html' %}
+{% block title %}All orders{% endblock %}
+
+{% block content %}
+<style>
+    table {
+        width: 100%;
+        border-collapse: collapse;
+    }
+
+    th,
+    td {
+        border: 1px solid black;
+        padding: 8px;
+        text-align: left;
+    }
+</style>
+
+<h3>All orders:</h3>
+<table>
+    <tr>
+        <th>Id</th>
+        <th>book id</th>
+        <th>user id</th>
+        <th>Created at</th>
+        <th>Plated end at</th>
+        <th>End at</th>
+        <th>Actions</th>
+    </tr>
+    {% for order in orders %}
+    <tr>
+        <td>{{ order.id }}</td>
+        <td>{{ order.book_id }}</td>
+        <td>{{ order.user_id }}</td>
+        <td>{{ order.created_at }}</td>
+        <td>{{ order.plated_end_at }}</td>
+        <td>{{ order.end_at }}</td>
+        <td>
+            <a href="{% url 'delete_order' order.id %}">Delete</a>
+            {% if order.end_at is None %}
+                <div><a href="{% url 'mark_as_returned' order.id %}">Mark as returned</a></div>
+            {% else %}
+                <div>Already returned</div>
+            {% endif %}
+        </td>
+    </tr>
+    {% endfor %}
+</table>
+{% endblock %}

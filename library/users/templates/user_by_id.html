@@ -1,0 +1,67 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<style>
+    .container {
+        margin-top: 50px;
+    }
+
+    form {
+        margin-bottom: 20px;
+    }
+
+    h4 {
+        margin-bottom: 5px;
+    }
+
+    input {
+        margin-bottom: 10px;
+        width: 200px;
+        padding: 5px;
+    }
+
+    button {
+        padding: 8px 12px;
+        background-color: #007bff;
+        color: #fff;
+        border: none;
+        cursor: pointer;
+    }
+
+    button:hover {
+        background-color: #0056b3;
+    }
+</style>
+<div class="container">
+    <form action="{% url 'update_user' user_data.id %}" method="post">
+        {% csrf_token %}
+        <h4>User id: {{ user_data.id }}</h4>
+        <h4>User email: {{ user_data.email }}</h4>
+        <h4>Last updated at: {{ user_data.updated_at }}</h4>
+        <h4>User first, middle, last name:</h4>
+        <input value="{{ user_data.first_name }}" name="first_name" required>
+        <input value="{{ user_data.middle_name }}" name="middle_name" required>
+        <input value="{{ user_data.last_name }}" name="last_name" required>
+
+        {% if user.role == 1 %}
+        <h4>User role (1-librarian, 0-user): </h4>
+        <input value="{{ user_data.role }}" name="user_role" required>
+        {% else %}
+        <h4>User role (1-librarian, 0-user): 0 </h4>
+        {% endif %}
+        <br>
+        <button type="submit">Update user</button>
+    </form>
+    <form action="{% url 'update_password' user_data.id %}" method="post">
+        {% csrf_token %}
+        <h3>New password:</h3>
+        <input name="password">
+        <button type="submit">Update password</button>
+    </form>
+    {% if user.role == 1 %}
+    <form action="{% url 'delete_user' user_data.id %}" method="post">
+        <button type="submit">Delete user</button>
+    </form>
+    {% endif %}
+</div>
+{% endblock %}

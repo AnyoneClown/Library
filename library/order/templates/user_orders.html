@@ -1,0 +1,37 @@
+{% extends 'base.html' %}
+{% block title %}User's Orders{% endblock %}
+
+{% block content %}
+<style>
+    table {
+        width: 100%;
+        border-collapse: collapse;
+    }
+
+    th, td {
+        border: 1px solid black;
+        padding: 8px;
+        text-align: left;
+    }
+</style>
+
+<h1>My orders:</h1>
+<table>
+    <tr>
+        <th>Id</th>
+        <th>Book name</th>
+        <th>Place order at</th>
+        <th>Planned return date</th>
+        <th>Actual return date</th>
+    </tr>
+    {% for order in orders %}
+    <tr>
+        <td>{{ order.0.id }}</td>
+        <td>{{ order.1 }}</td>
+        <td>{{ order.0.created_at }}</td>
+        <td>{{ order.0.plated_end_at }}</td>
+        <td>{{ order.0.end_at }}</td>
+    </tr>
+    {% endfor %}
+</table>
+{% endblock %}

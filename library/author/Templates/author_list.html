@@ -1,0 +1,71 @@
+{% extends 'base.html' %}
+{% block title %}All Authors and Books{% endblock title %}
+{% block content %}
+<style>
+	.container {
+		margin-top: 50px;
+	}
+
+	h2 {
+		margin-bottom: 20px;
+	}
+
+	table {
+		width: 100%;
+		border-collapse: collapse;
+	}
+
+	th,
+	td {
+		padding: 8px;
+		text-align: left;
+		border-bottom: 1px solid #ddd;
+	}
+
+	.btn-danger {
+		background-color: #dc3545;
+		border-color: #dc3545;
+	}
+
+	.create-btn {
+		margin-bottom: 20px;
+	}
+</style>
+<div class="container">
+	<h2>All Authors and Books</h2>
+	<a href="{% url 'author_create' %}" class="btn btn-primary create-btn">Create Author</a>
+	<table>
+		<thead>
+			<tr>
+				<th>ID</th>
+				<th>Name</th>
+				<th>Patronymic</th>
+				<th>Surname</th>
+				<th>Books</th>
+				<th>Actions</th>
+			</tr>
+		</thead>
+		<tbody>
+			{% for author in authors %}
+			<tr>
+				<td>{{ author.0.id }}</td>
+				<td>{{ author.0.name }}</td>
+				<td>{{ author.0.patronymic }}</td>
+				<td>{{ author.0.surname }}</td>
+				<td>
+					{{ author.1 }}
+				</td>
+				<td>
+					{% if not author.1 %}
+					<form method="post" action="{% url 'author_delete' author.0.id %}">
+						{% csrf_token %}
+						<button type="submit" class="btn btn-danger">Remove</button>
+					</form>
+					{% endif %}
+				</td>
+			</tr>
+			{% endfor %}
+		</tbody>
+	</table>
+</div>
+{% endblock content %}

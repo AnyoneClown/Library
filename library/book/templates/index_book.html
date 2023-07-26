@@ -1,0 +1,109 @@
+{% extends 'base.html' %}
+
+{% block title %}Books{%endblock%}
+
+{% block control %}
+<style>
+    .container {
+        margin-top: 50px;
+    }
+
+    h1 {
+        margin-bottom: 20px;
+    }
+
+    form {
+        margin-bottom: 10px;
+    }
+
+    input {
+        margin-right: 10px;
+        padding: 5px;
+    }
+
+    button {
+        padding: 8px 12px;
+        background-color: #007bff;
+        color: #fff;
+        border: none;
+        cursor: pointer;
+    }
+
+    button:hover {
+        background-color: #0056b3;
+    }
+
+    h3 {
+        margin-bottom: 10px;
+    }
+
+    a {
+        color: #007bff;
+        text-decoration: none;
+    }
+</style>
+<div class="container">
+    <h1>Your's book hall</h1>
+    <form action="{% url 'filter_by_page' %}" method="get">
+        {% csrf_token %}
+        <input type="text" name="filter">
+        <button type="submit">Filter by criteria (criteria:value)</button>
+    </form>
+    <br>
+    {% if role == 1 %}
+    <a href="{% url 'provided_to' %}" class="btn btn-primary">View books provided to specific user</a>
+    <a href="{% url 'create_book' %}" class="btn btn-primary">Create book</a>
+    {% endif %}
+    <a href="{% url 'index_books' %}" class="btn btn-primary">View all books</a>
+</div>
+{% endblock %}
+
+{% block content %}
+<style>
+    table {
+        width: 100%;
+        border-collapse: collapse;
+    }
+
+    th,
+    td {
+        border: 1px solid black;
+        padding: 8px;
+        text-align: left;
+    }
+
+    th {
+        background-color: #f2f2f2;
+    }
+
+    a {
+        color: #007bff;
+        text-decoration: none;
+    }
+</style>
+<h1>{{ action }}</h1>
+<table>
+    <thead>
+        <tr>
+            <th>Id</th>
+            <th>Name</th>
+            <th>Authors</th>
+            <th>Description</th>
+            <th>Count</th>
+            <th>Details</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for book in books %}
+        <tr>
+            <td>{{ book.0.id }}</td>
+            <td>{{ book.0.name }}</td>
+            <td>{{ book.1 }}</td>
+            <td>{{ book.0.description }}</td>
+            <td>{{ book.0.count }}</td>
+            <td><a href="{% url 'book_by_id' book.0.id %}" class="btn btn-primary">Review</a></td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+{% endblock %}
