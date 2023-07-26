@@ -31,7 +31,9 @@ def author_create(request):
             name = form.cleaned_data['name']
             surname = form.cleaned_data['surname']
             patronymic = form.cleaned_data['patronymic']
-            author = Author(name=name, surname=surname, patronymic=patronymic)
+            birth_date = form.cleaned_data['birth_date']
+            bio = form.cleaned_data['bio']
+            author = Author(name=name, surname=surname, patronymic=patronymic, birth_date=birth_date, bio=bio)
             author.save()
             return redirect('author_list')
     else:

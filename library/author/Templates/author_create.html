@@ -2,44 +2,52 @@
 <html lang="en">
 
 <head>
-	<!-- Required meta tags -->
-	<meta charset="utf-8">
-	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
-	<!-- Bootstrap CSS -->
-	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
-		integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+        integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
 
-	<title>Create Author</title>
+    <title>Create Author</title>
 </head>
 
 <body>
-	<div class="container">
-		<div class="row justify-content-center">
-			<div class="col-md-6">
-				<h2 class="text-center">Create Author</h2>
-				<hr>
-				<form method="post" action="{% url 'author_create' %}">
-					{% csrf_token %}
-					<div class="form-group">
-						<label for="name">Name:</label>
-						<input type="text" class="form-control" id="name" name="name" placeholder="Enter Name" required>
-					</div>
-					<div class="form-group">
-						<label for="surname">Surname:</label>
-						<input type="text" class="form-control" id="surname" name="surname" placeholder="Enter Surname" required>
-					</div>
-					<div class="form-group">
-						<label for="patronymic">Patronymic:</label>
-						<input type="text" class="form-control" id="patronymic" name="patronymic" placeholder="Enter Patronymic">
-					</div>
-					<div class="text-center">
-						<button type="submit" class="btn btn-primary">Create</button>
-					</div>
-				</form>
-			</div>
-		</div>
-	</div>
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-md-6">
+                <h2 class="text-center">Create Author</h2>
+                <hr>
+                <form method="post" action="{% url 'author_create' %}">
+                    {% csrf_token %}
+                    <div class="form-group">
+                        <label for="name">Name:</label>
+                        <input type="text" class="form-control" id="name" name="name" placeholder="Enter Name" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="surname">Surname:</label>
+                        <input type="text" class="form-control" id="surname" name="surname" placeholder="Enter Surname" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="patronymic">Patronymic:</label>
+                        <input type="text" class="form-control" id="patronymic" name="patronymic" placeholder="Enter Patronymic">
+                    </div>
+                    <div class="form-group">
+                        <label for="birth_date">Birth Date:</label>
+                        <input type="date" class="form-control" id="birthdate" name="birth_date" placeholder="Enter Birth Date">
+                    </div>
+                    <div class="form-group">
+                        <label for="bio">Bio:</label>
+                        <textarea class="form-control" id="bio" name="bio" placeholder="Enter Bio"></textarea>
+                    </div>
+                    <div class="text-center">
+                        <button type="submit" class="btn btn-primary">Create</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
 </body>
 
 </html>

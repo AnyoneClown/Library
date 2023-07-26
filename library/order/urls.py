@@ -16,7 +16,6 @@ urlpatterns = [
     path("orders/create-order", views.create_order, name="create_order"),
     path("orders/place-order", views.place_order, name="place_order"),
 
-    path('api/v1/order/', OrderViewSet.as_view({'get': 'list', 'post': 'create'}), name='all_orders'),
     path('api/v1/order/<int:pk>', OrderViewSet.as_view({'get': 'retrieve', 'put': 'update', 'delete': 'destroy'}), name='order_detail'),
 
     path('api/v1/user/<int:user_id>/order/', OrderViewSet.as_view({'get': 'list', 'post': 'create'}), name='orders'),
